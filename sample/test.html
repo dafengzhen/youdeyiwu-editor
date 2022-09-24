@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+  <head>
+    <title>Test CKEditor build</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="test.css" />
+    <style>
+      .box {
+        margin: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="editor"></div>
+    </div>
+
+    <script src="../build/ckeditor.min.js"></script>
+    <script>
+      const watchdog = new CKSource.EditorWatchdog();
+
+      window.watchdog = watchdog;
+
+      watchdog.setCreator((element, config) => {
+        return CKSource.Editor.create(element, config).then((editor) => {
+          CKSource.CKEditorInspector.attach(editor);
+
+          return editor;
+        });
+      });
+
+      watchdog.setDestructor((editor) => {
+        return editor.destroy();
+      });
+
+      watchdog.on("error", handleError);
+
+      watchdog
+        .create(document.querySelector(".editor"), {
+          licenseKey: "",
+        })
+        .catch(handleError);
+
+      function handleError(error) {
+        console.error("Oops, something went wrong!");
+        console.error(
+          "Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:"
+        );
+        console.warn("Build id: w2v3fs2kef1z-gi3oq6433821");
+        console.error(error);
+      }
+    </script>
+  </body>
+</html>

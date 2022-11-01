@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
-	<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32-2dcaa14ca8.png" sizes="32x32">
+<!--	<link rel="icon" type="image/png" href="https://ckeditor.com/assets/images/favicons/32x32-2dcaa14ca8.png" sizes="32x32">-->
 	<meta charset="utf-8">
-	<title>CKEditor 5 – Development Sample</title>
+	<title>development</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 	<style>
-		body {
-			max-width: 800px;
-			margin: 20px auto;
-		}
-
 		.ck-focused {
 			color: #212529 !important;
 			background-color: #fff !important;
@@ -21,57 +17,58 @@
 </head>
 <body>
 
-<h1>CKEditor 5 – Development Sample</h1>
+<h1 class="text-center m-4 fs-5">development</h1>
 
-<div id="editor">
-	<h2>Development environment</h2>
-	<p>
-		This is a demo of the <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#classic-editor">classic editor
-		build</a> that loads <code>MyPlugin</code>, which is an example plugin produced by the package generator. You can modify this
-		sample and use it to validate whether a plugin or a set of plugins work fine.
-	</p>
-	<p>
-		<code>MyPlugin</code> inserts a text into the editor. You can click the CKEditor 5 icon in the toolbar and see the results.
-	</p>
+<div class="m-5">
+	<div id="editor">
+		<h2>Development environment</h2>
+		<p>
+			This is a demo of the <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#classic-editor">classic editor
+			build</a> that loads <code>MyPlugin</code>, which is an example plugin produced by the package generator. You can modify this
+			sample and use it to validate whether a plugin or a set of plugins work fine.
+		</p>
+		<p>
+			<code>MyPlugin</code> inserts a text into the editor. You can click the CKEditor 5 icon in the toolbar and see the results.
+		</p>
 
-	<h3>Helpful resources</h3>
-	<ul>
-		<li>Architecture
-			<ul>
-				<li>
-					<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/architecture/core-editor-architecture.html">Core editor architecture</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/architecture/editing-engine.html">The editing engine</a>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/architecture/ui-library.html">The UI library</a>
-				</li>
-			</ul>
-		</li>
+		<h3>Helpful resources</h3>
+		<ul>
+			<li>Architecture
+				<ul>
+					<li>
+						<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/architecture/core-editor-architecture.html">Core editor architecture</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/architecture/editing-engine.html">The editing engine</a>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/architecture/ui-library.html">The UI library</a>
+					</li>
+				</ul>
+			</li>
 
-		<li>
-			<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/support/browser-compatibility.html">Browser compatibility</a>
-		</li>
+			<li>
+				<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/support/browser-compatibility.html">Browser compatibility</a>
+			</li>
 
-		<li>
-			<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/support/error-codes.html">The error codes</a>
-		</li>
+			<li>
+				<a href="https://ckeditor.com/docs/ckeditor5/latest/framework/guides/support/error-codes.html">The error codes</a>
+			</li>
 
-		<li><a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/dll-builds.html">The DLL builds</a></li>
-	</ul>
+			<li><a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/dll-builds.html">The DLL builds</a></li>
+		</ul>
 
-	<h3>The directory structure</h3>
+		<h3>The directory structure</h3>
 
-	<p>
-		The code snippet below presents the directory structure.
-	</p>
+		<p>
+			The code snippet below presents the directory structure.
+		</p>
 
-	<pre><code class="language-plaintext">.
+		<pre><code class="language-plaintext">.
 ├─ lang
 │  └─ contexts.json    # Entries used for creating translations.
 ├─ sample
@@ -98,12 +95,13 @@
 ├─ README.md
 └─ .tsconfig.json      # TypeScript configuration file.</code></pre>
 
-	<h3>Reporting issues</h3>
-	<p>If you found a problem with CKEditor 5 or the package generator, please, report an issue:</p>
-	<ul>
-		<li><a href="https://github.com/ckeditor/ckeditor5/issues/new/choose">CKEditor 5</a></li>
-		<li><a href="https://github.com/ckeditor/ckeditor5-package-generator/issues/new">The package generator</a></li>
-	</ul>
+		<h3>Reporting issues</h3>
+		<p>If you found a problem with CKEditor 5 or the package generator, please, report an issue:</p>
+		<ul>
+			<li><a href="https://github.com/ckeditor/ckeditor5/issues/new/choose">CKEditor 5</a></li>
+			<li><a href="https://github.com/ckeditor/ckeditor5-package-generator/issues/new">The package generator</a></li>
+		</ul>
+	</div>
 </div>
 
 <script src="./ckeditor.dist.js"></script>

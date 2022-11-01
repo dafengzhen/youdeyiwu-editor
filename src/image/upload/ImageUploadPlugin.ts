@@ -21,7 +21,7 @@ export default class ImageUploadPlugin extends Plugin {
 	}
 
 	public override init(): void {
-		const options = this.editor.config.get( 'ImageUploadYw' );
+		const options = this.editor.config.get( 'ywImageUpload' );
 		if ( !options ) {
 			return;
 		}

@@ -63,8 +63,8 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import EditorWatchdog from '@ckeditor/ckeditor5-watchdog/src/editorwatchdog.js';
-import YWBox from './plugin/ywbox/ywbox/ywbox';
 import ImageUploadPlugin from "./plugin/image/upload/ImageUploadPlugin";
+import YwBox from './plugin/ywbox/ywbox/ywbox';
 
 class Editor extends ClassicEditor {
 }
@@ -131,7 +131,7 @@ Editor.builtinPlugins = [
 	TodoList,
 	Underline,
 	ImageUploadPlugin,
-	YWBox,
+	YwBox,
 ];
 
 // Editor configuration.
@@ -196,6 +196,7 @@ Editor.defaultConfig = {
 		],
 	},
 	ywImageUpload: {},
+	ywBox: {}
 	// htmlSupport: {
 	//   allow: [
 	//     {

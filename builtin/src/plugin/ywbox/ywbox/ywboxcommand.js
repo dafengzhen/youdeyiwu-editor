@@ -1,152 +1,80 @@
 import Command from '@ckeditor/ckeditor5-core/src/command';
 import { toMap } from '@ckeditor/ckeditor5-utils';
 
-export default class YWBoxCommand extends Command {
-  constructor(editor) {
-    super(editor);
-
-    this._chosenAssets = new Set();
-
-    this._isOn = false;
-
-    this._initListeners();
-  }
-
-  _initListeners() {
-    const editor = this.editor;
-    const model = editor.model;
-    const ywboxConfig = editor.config.get('ywbox');
-
-    //
-    this.on(
-      'ywbox',
-      () => {
-        this.refresh();
-      },
-      { priority: 'low' }
-    );
-
-    //
-    this.on('ywbox:open', () => {
-      if (typeof ywboxConfig.onOpen === 'function') {
-        this._isOn = true;
-        ywboxConfig.onOpen({
-          onClose: () => this.fire('ywbox:close'),
-          onChoose: (assets) => this.fire('ywbox:choose', assets),
-        });
-      }
-    });
-
-    //
-    this.on('ywbox:close', () => {
-      if (!this._isOn) {
-        return;
-      }
-      this._isOn = false;
-    });
-
-    //
-    this.on('ywbox:choose', (evt, assets) => {
-      if (!this.isEnabled) {
-        return;
-      }
-
-      const imageCommand = editor.commands.get('insertImage');
-      const linkCommand = editor.commands.get('link');
-
-      const assetsToProcess = assets.filter((asset) =>
-        asset.isImage === 'image'
-          ? imageCommand.isEnabled
-          : linkCommand.isEnabled
-      );
-
-      if (assetsToProcess.length === 0) {
-        return;
-      }
-
-      model.change((writer) => {
-        for (const asset of assetsToProcess) {
-          const isLastAsset =
-            asset === assetsToProcess[assetsToProcess.length - 1];
-
-          this._insertAsset(asset, isLastAsset, writer);
-
-          setTimeout(() => this._chosenAssets.delete(asset), 2000);
-          this._chosenAssets.add(asset);
+export default class YwBoxCommand extends Command {
+    constructor(editor) {
+        super(editor);
+        this.isOn = false;
+        this.initListener();
+    }
+    initListener() {
+        const editor = this.editor;
+        const model = editor.model;
+        const config = editor.config.get('ywBox');
+        if (!config) {
+            return;
         }
-      });
-    });
-
-    //
-    this.listenTo(editor, 'destroy', () => {
-      this.fire('ywbox:close');
-      this._chosenAssets.clear();
-    });
-  }
-
-  refresh() {
-    this.value = this._getValue();
-    this.isEnabled = this._checkEnabled();
-  }
-
-  _getValue() {
-    return this._isOn;
-  }
-
-  _checkEnabled() {
-    const imageCommand = this.editor.commands.get('insertImage');
-    const linkCommand = this.editor.commands.get('link');
-    return !(!imageCommand.isEnabled && !linkCommand.isEnabled);
-  }
-
-  _insertAsset(asset, isLastAsset, writer) {
-    const editor = this.editor;
-    const model = editor.model;
-    const selection = model.document.selection;
-
-    writer.removeSelectionAttribute('linkHref');
-
-    if (asset.isImage) {
-      this._insertImage(asset);
-    } else {
-      this._insertLink(asset, writer);
+        this.on('ywbox:open', () => {
+            if (typeof config.onOpen !== 'function') {
+                return;
+            }
+            this.isOn = true;
+            // noinspection TypeScriptValidateJSTypes
+            config.onOpen({
+                onClose: () => this.fire('ywbox:close'),
+                onSelect: (file) => this.fire('ywbox:select', file)
+            });
+        });
+        this.on('ywbox:close', () => {
+            if (!this.isOn) {
+                return;
+            }
+            this.isOn = false;
+        });
+        this.on('ywbox:select', (evt, file) => {
+            if (!this.isEnabled ||
+                typeof file !== 'object' ||
+                Object.keys(file).length === 0 ||
+                !(String(file.id)) ||
+                !file.originalName) {
+                return;
+            }
+            if (file.isImage && (!file.urls || typeof file.urls !== 'object' || !file.urls.default)) {
+                return;
+            }
+            model.change(writer => {
+                if (file.isImage) {
+                    editor.execute('insertImage', {
+                        source: [
+                            {
+                                src: file.urls.default,
+                                alt: file.originalName
+                            }
+                        ]
+                    });
+                }
+                else {
+                    const selection = model.document.selection;
+                    const selectionAttributes = toMap(selection.getAttributes());
+                    selectionAttributes.set('fid', file.id);
+                    selectionAttributes.set('fname', file.originalName);
+                    const range = model.insertContent(writer.createElement('ywbox', selectionAttributes));
+                    writer.setSelection(range);
+                }
+                this.fire('ywbox:close');
+            });
+        });
+        this.on('destroy', () => {
+            this.fire('ywbox:close');
+        });
     }
-
-    if (!isLastAsset) {
-      writer.setSelection(selection.getLastPosition());
+    refresh() {
+        // noinspection JSConstantReassignment
+        this.value = this.isOn;
+        // noinspection JSConstantReassignment
+        this.isEnabled = !!this.editor.commands.get('link')?.isEnabled;
     }
-  }
-
-  _insertImage(asset) {
-    const editor = this.editor;
-    const { urls, originalName } = asset;
-    editor.execute('insertImage', {
-      source: [
-        {
-          src: urls.default,
-          alt: originalName,
-        },
-      ],
-    });
-  }
-
-  _insertLink(asset, writer) {
-    const editor = this.editor;
-    const model = editor.model;
-    const selection = model.document.selection;
-    const { urls, originalName } = asset;
-
-    if (selection.isCollapsed) {
-      const selectionAttributes = toMap(selection.getAttributes());
-      const textNode = writer.createText(originalName, selectionAttributes);
-      const range = model.insertContent(textNode);
-      writer.setSelection(range);
+    execute() {
+        this.fire('ywbox:open');
     }
-
-    editor.execute('link', urls.default);
-  }
-
-  execute() {
-    this.fire('ywbox:open');
-  }
 }

@@ -21,7 +21,6 @@ import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
-// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Link from '@ckeditor/ckeditor5-link/src/link';
@@ -33,12 +32,12 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
 
-import MyPlugin from '../src/myplugin';
+import { MyPlugin, Ywbox } from '../src';
 import ImageUploadPlugin from '../src/image/upload/ImageUploadPlugin';
 
 ClassicEditor
 	.create( document.getElementById( 'editor' )!, {
-		extraPlugins: [ ImageUploadPlugin ],
+		extraPlugins: [ ImageUploadPlugin, Ywbox ],
 		plugins: [
 			Essentials,
 			Autoformat,
@@ -64,9 +63,6 @@ ClassicEditor
 			MyPlugin
 		],
 		toolbar: [
-			// `myButton` is an example button provided by the `MyPlugin` class.
-			'myButton',
-			'|',
 			'heading',
 			'|',
 			'bold',
@@ -86,7 +82,11 @@ ClassicEditor
 			'codeBlock',
 			'|',
 			'undo',
-			'redo'
+			'redo',
+			'|',
+			// `myButton` is an example button provided by the `MyPlugin` class.
+			'myButton',
+			'ywbox'
 		],
 		image: {
 			toolbar: [
@@ -120,6 +120,25 @@ ClassicEditor
 				}
 			}
 			// controller: new AbortController()
+		},
+		ywBox: {
+			onOpen: ( { onSelect }: { onSelect: ( file: object ) => void } ) => {
+				// onSelect( {
+				// 	id: '123456',
+				// 	originalName: 'test.png'
+				// } );
+
+				onSelect( {
+					id: '123456',
+					originalName: 'test.png',
+					isImage: true,
+					urls: {
+						default: 'https://www.youdeyiwu.com/_next/image?url=' +
+							'https%3A%2F%2Fwww.youdeyiwu.com%2Foss%2Fyoudeyiwu%2Fforum%2Fsection%2Fcover%2F1%2F220924%2F' +
+							'9IOjU2z5YwHn&w=384&q=75'
+					}
+				} );
+			}
 		}
 	} as CustomEditConfig )
 	.then( editor => {

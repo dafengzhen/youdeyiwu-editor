@@ -6,10 +6,11 @@ import YwBoxUi from './ywboxui';
  * 文件管理.
  */
 export default class YwBox extends Plugin {
-    static get pluginName() {
-        return 'YwBox';
-    }
-    static get requires() {
-        return [YwBoxEditing, YwBoxUi];
-    }
+	static get pluginName() {
+		return 'YwBox';
+	}
+
+	static get requires() {
+		return [YwBoxEditing, YwBoxUi];
+	}
 }

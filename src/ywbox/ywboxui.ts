@@ -17,10 +17,7 @@ export default class YwBoxUi extends Plugin {
 		}
 
 		editor.ui.componentFactory.add( 'ywbox', locale => {
-			console.log( 'YwBoxUi' );
-
 			const view = new ButtonView( locale );
-
 			view.set( {
 				label: t( '文件管理' ),
 				icon: browseFilesIcon,
@@ -29,7 +26,6 @@ export default class YwBoxUi extends Plugin {
 
 			view.bind( 'isOn' ).to( ywbox, 'value' );
 			view.bind( 'isEnabled' ).to( ywbox, 'isEnabled' );
-
 			view.on( 'execute', () => {
 				editor.execute( 'ywbox' );
 			} );

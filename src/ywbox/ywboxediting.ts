@@ -14,8 +14,6 @@ export default class YwBoxEditing extends Plugin {
 	}
 
 	public override init(): void {
-		console.log( 'YwBox => init' );
-
 		this.initSchema();
 		this.initConversion();
 	}

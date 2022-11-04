@@ -18,6 +18,13 @@ export default class YwBoxCommand extends Command {
 			return;
 		}
 
+		this.on(
+			'ywbox',
+			() => {
+				this.refresh();
+			},
+			{ priority: 'low' }
+		);
 		this.on( 'ywbox:open', () => {
 			if ( typeof config.onOpen !== 'function' ) {
 				return;
@@ -31,12 +38,8 @@ export default class YwBoxCommand extends Command {
 			} );
 		} );
 		this.on( 'ywbox:close', () => {
-			if ( !this.isOn ) {
-				return;
-			}
 			this.isOn = false;
 		} );
-
 		this.on( 'ywbox:select', ( evt, file ) => {
 			if ( !this.isEnabled ||
 				typeof file !== 'object' ||

@@ -16,14 +16,15 @@ import ImageUploadAdapter from './ImageUploadAdapter';
  * </pre>
  */
 export default class ImageUploadPlugin extends Plugin {
-    static get pluginName() {
-        return 'ImageUploadPlugin';
-    }
-    init() {
-        const options = this.editor.config.get('ywImageUpload');
-        if (!options) {
-            return;
-        }
-        this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new ImageUploadAdapter(loader, options);
-    }
+	static get pluginName() {
+		return 'ImageUploadPlugin';
+	}
+
+	init() {
+		const options = this.editor.config.get('ywImageUpload');
+		if (!options) {
+			return;
+		}
+		this.editor.plugins.get('FileRepository').createUploadAdapter = loader => new ImageUploadAdapter(loader, options);
+	}
 }

@@ -8,7 +8,7 @@ youdeyiwu-editor 尤得一物-编辑器
 
 - 访问
 
-访问 [www.youdeyiwu.com](https://www.youdeyiwu.com)
+演示 [www.youdeyiwu.com](https://www.youdeyiwu.com)
 
 - 相关
 
@@ -20,7 +20,7 @@ youdeyiwu-editor 尤得一物-编辑器
 
 - 预览
 
-打开 `sample/index.html` 页面
+打开 `sample/test.html` 页面
 
 - 配置
 

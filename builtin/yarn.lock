@@ -167,14 +167,14 @@
     "@ckeditor/ckeditor5-utils" "^35.3.0"
     lodash-es "^4.17.15"
 
-"@ckeditor/ckeditor5-dev-utils@^31.1.5":
-  version "31.1.5"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-31.1.5.tgz#dab8a41101fba88ab26f576abd990174a5409eaf"
-  integrity sha512-0hBxhrA0aLkLHxmC3Pc9ruebELeWtOFqK599Lo304CdA3R9UOIYwHnNCXw8NTwnxAtPuvsqAATwbHGEV/tpy9g==
+"@ckeditor/ckeditor5-dev-utils@^31.1.8":
+  version "31.1.8"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-31.1.8.tgz#ad2b54b760bb9be4d33ec5490a90ea22e275ac38"
+  integrity sha512-2LjzIX6YbuFQzzv5ltuEMjuBJ8cfW2HCf2lbpO+6JwG3wSkkwQs8NNEW8oAC78jTFvJxuF4Dw0Z05Pv/4JPWmw==
   dependencies:
     "@babel/parser" "^7.18.9"
     "@babel/traverse" "^7.18.9"
-    "@ckeditor/ckeditor5-dev-webpack-plugin" "^31.1.5"
+    "@ckeditor/ckeditor5-dev-webpack-plugin" "^31.1.8"
     chalk "^3.0.0"
     cli-cursor "^3.1.0"
     cli-spinners "^2.6.1"
@@ -197,12 +197,12 @@
     through2 "^3.0.1"
     ts-loader "^9.3.0"
 
-"@ckeditor/ckeditor5-dev-webpack-plugin@^31.1.5":
-  version "31.1.5"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-webpack-plugin/-/ckeditor5-dev-webpack-plugin-31.1.5.tgz#168080cbc5cae19ce7c11a558dadc973ef4f4af2"
-  integrity sha512-3/HJ8JoXjJzfMbVREpBIQk01p9hA/zakKnUkGCypW/wgILnqFJECJIG7T0MkyLsdt5obU7F4tzF5rVD7+OHhwA==
+"@ckeditor/ckeditor5-dev-webpack-plugin@^31.1.8":
+  version "31.1.8"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-dev-webpack-plugin/-/ckeditor5-dev-webpack-plugin-31.1.8.tgz#37daffa679e95d452568073961aa87f51ec8d41a"
+  integrity sha512-VpkhTuUKcNkP53TyiaiQx1j8uQVg4yoUtUcoLULtMNasBCYZVDLuuHxm9/HkrfnQdjUYF11zcjsqJn5DZccxjQ==
   dependencies:
-    "@ckeditor/ckeditor5-dev-utils" "^31.1.5"
+    "@ckeditor/ckeditor5-dev-utils" "^31.1.8"
     chalk "^4.0.0"
     rimraf "^3.0.2"
     semver "^7.3.4"
